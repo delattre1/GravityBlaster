@@ -6,13 +6,21 @@ public class PlayerController : MonoBehaviour
 {
     Animator controlAnimation;   
     Rigidbody2D rb2D;
-    Vector3 direction, currentPosition;
+    Vector3 direction, currentPosition, baseScale;
+
     float yAxis, xAxis;
     bool isMoving;
     float vel = 10;
 
     void Start() {
+        baseScale = transform.localScale;
         controlAnimation = GetComponent<Animator>();
+    }
+
+    void changeFacingDirection() {
+        Vector3 newScale = baseScale;
+        if (xAxis < 0) { newScale.x = -baseScale.x;}
+        transform.localScale = newScale;
     }
 
     void Update() {
@@ -32,6 +40,11 @@ public class PlayerController : MonoBehaviour
         rb2D.MovePosition(
             currentPosition + direction * vel * Time.deltaTime
         );
+
+        if (isMoving) {
+            changeFacingDirection();
+        }
+
 
         //aimRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         //Debug.DrawRay(aimRay.origin, aimRay.direction*100, Color.red);
