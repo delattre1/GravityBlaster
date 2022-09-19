@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0ee43e21be55a1644bb1ebfa0612924f
+guid: bac664997f94396409db11d07f4fe0a4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: laser gun animation_0
+      name: Attack1_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 290
-        height: 140
+        width: 231
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -130,20 +130,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2454446f17f639245b38683653210136
-      internalID: -1195004057
+      spriteID: 07b42bd315bea4248a15529518b31026
+      internalID: 1921053312
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: laser gun animation_1
+      name: Attack1_1
       rect:
         serializedVersion: 2
-        x: 290
+        x: 231
         y: 0
-        width: 290
-        height: 140
+        width: 231
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -151,20 +151,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a027a83ba4eaeb74fb606856ba48dc44
-      internalID: 480313728
+      spriteID: 159af58906025954dbf0c210c55cba5e
+      internalID: 1300635592
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: laser gun animation_2
+      name: Attack1_2
       rect:
         serializedVersion: 2
-        x: 580
+        x: 462
         y: 0
-        width: 290
-        height: 140
+        width: 231
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -172,20 +172,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 595376c029b45ed4d8ba354d8c7c47c1
-      internalID: -898409622
+      spriteID: 39faa21c12eda9d479536bea7ffcd989
+      internalID: -215555902
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: laser gun animation_3
+      name: Attack1_3
       rect:
         serializedVersion: 2
-        x: 870
+        x: 693
         y: 0
-        width: 290
-        height: 140
+        width: 231
+        height: 190
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,8 +193,92 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 66f72af5e9d4c714d96a7d5480bfacd9
-      internalID: 1465614337
+      spriteID: 183637d3f5dfacb40a8a1f5823a85309
+      internalID: -1927575248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack1_4
+      rect:
+        serializedVersion: 2
+        x: 924
+        y: 0
+        width: 231
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f0ec3f9f21e62545982162c26fcadc7
+      internalID: -925442396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack1_5
+      rect:
+        serializedVersion: 2
+        x: 1155
+        y: 0
+        width: 231
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1279a743ba7ed3b4b9b63b015cc46cc1
+      internalID: 218831380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack1_6
+      rect:
+        serializedVersion: 2
+        x: 1386
+        y: 0
+        width: 231
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f78ef56b2039cc40a6f754b8c5c5cc9
+      internalID: -1004163114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Attack1_7
+      rect:
+        serializedVersion: 2
+        x: 1617
+        y: 0
+        width: 231
+        height: 190
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8808a5b3e1b2504485fd083cdd10779
+      internalID: -1467574007
       vertices: []
       indices: 
       edges: []
@@ -210,10 +294,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      laser gun animation_1: 480313728
-      laser gun animation_3: 1465614337
-      laser gun animation_0: -1195004057
-      laser gun animation_2: -898409622
+      Attack1_5: 218831380
+      Attack1_6: -1004163114
+      Attack1_7: -1467574007
+      Attack1_0: 1921053312
+      Attack1_3: -1927575248
+      Attack1_2: -215555902
+      Attack1_4: -925442396
+      Attack1_1: 1300635592
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

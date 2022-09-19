@@ -4,40 +4,46 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public LayerMask groundLayerMask;
     Animator controlAnimation;   
-    Rigidbody2D rb2D;
+    Rigidbody2D rb;
     Vector3 direction, currentPosition, baseScale;
+    CapsuleCollider2D capsColl; 
 
-    float yAxis, xAxis;
+    float xAxis;
     bool isMoving;
     float vel = 10;
+    bool isGrounded;
 
     void Start() {
         baseScale = transform.localScale;
         controlAnimation = GetComponent<Animator>();
+        capsColl = GetComponent<CapsuleCollider2D>();
     }
 
     void changeFacingDirection() {
-        Vector3 newScale = baseScale;
-        if (xAxis < 0) { newScale.x = -baseScale.x;}
+        Vector3 newScale = transform.localScale;
+        if (xAxis < 0) { newScale.x = -baseScale.x;} else 
+        if (xAxis > 0) { newScale.x =  baseScale.x;}
         transform.localScale = newScale;
     }
 
-    void Update() {
-        xAxis = Input.GetAxis("Horizontal");
-        yAxis = Input.GetAxis("Vertical");
-        direction = new Vector3(xAxis, yAxis, 0);
-
-        //Update animation
-        isMoving = direction.magnitude != 0;
-        controlAnimation.SetBool("isMoving", isMoving);
+    void changeStandingDirection() {
+        Vector3 newScale = transform.localScale;
+        newScale.y = -newScale.y;
+        transform.localScale = newScale;
     }
 
-    void FixedUpdate() { //padrao execucao a cada 0.2 segundos
-        rb2D = GetComponent<Rigidbody2D>();
-        currentPosition = rb2D.position;
 
-        rb2D.MovePosition(
+    void handleMovimentation() {
+        xAxis = Input.GetAxis("Horizontal");
+        direction = new Vector3(xAxis, 0, 0);
+
+        // Move the character alon x axis
+        rb = GetComponent<Rigidbody2D>();
+        currentPosition = rb.position;
+
+        rb.MovePosition(
             currentPosition + direction * vel * Time.deltaTime
         );
 
@@ -45,16 +51,65 @@ public class PlayerController : MonoBehaviour
             changeFacingDirection();
         }
 
+        //Update animation
+        isMoving = direction.magnitude != 0;
+        controlAnimation.SetBool("isMoving", isMoving);
+    }
 
-        //aimRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        //Debug.DrawRay(aimRay.origin, aimRay.direction*100, Color.red);
+    void handleGravity() {
+        if (Input.GetKeyDown(KeyCode.O)) {
+            rb.gravityScale *= -1;
+            changeStandingDirection();
+        }
+    }
 
-        //if (Physics.Raycast(aimRay, out impact, 100, GroundMask)) {
-        //    positionPlayerAim = impact.point - transform.position;
-        //    positionPlayerAim.y = transform.position.y;
+    void handleJump() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            Debug.Log("Should Jump");
+            float jmpVel = 100;
+            rb.velocity = Vector2.up * jmpVel;
+        }
 
-        //    Quaternion newRotation = Quaternion.LookRotation(positionPlayerAim);
-        //    rb2D.MoveRotation(newRotation);
-        //}
+    }
+
+    bool checkGrounded() {
+        //Color rayColor;
+        float extraHeight = 0.1f;
+        float capsHeight = capsColl.bounds.extents.y * 2;
+        Vector3 startRayPosition = capsColl.bounds.max;
+        startRayPosition.y += extraHeight;
+
+
+        RaycastHit2D rayCast = Physics2D.Raycast(
+                       startRayPosition,
+                        Vector2.down,
+                        capsHeight + 2*extraHeight,
+                        groundLayerMask
+                        );
+        //Debug
+        //if (rayCast != null) {rayColor = Color.green;}
+        //else {rayColor = Color.red;}
+
+        //Debug.DrawRay(
+        //            startRayPosition,
+        //            Vector2.down * (capsHeight + 2*extraHeight),
+        //            rayColor
+        //            );
+
+        //Debug.Log(rayCast.collider);
+        return rayCast.collider != null;
+    }
+
+    void Update() {
+        isGrounded = checkGrounded();
+
+        if (isGrounded) {
+            handleGravity();
+            handleJump();
+        }
+    }
+
+    void FixedUpdate() { //padrao execucao a cada 0.2 segundos
+        handleMovimentation();
     }
 }
