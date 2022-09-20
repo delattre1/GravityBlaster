@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Vector3 direction, currentPosition, baseScale;
     CapsuleCollider2D capsColl; 
+
+    public Text debugText;
 
     float xAxis;
     bool isMoving;
@@ -19,6 +22,7 @@ public class PlayerController : MonoBehaviour
         baseScale = transform.localScale;
         controlAnimation = GetComponent<Animator>();
         capsColl = GetComponent<CapsuleCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void changeFacingDirection() {
@@ -34,17 +38,18 @@ public class PlayerController : MonoBehaviour
         transform.localScale = newScale;
     }
 
-
+    //float vy = 0;
     void handleMovimentation() {
         xAxis = Input.GetAxis("Horizontal");
         direction = new Vector3(xAxis, 0, 0);
 
         // Move the character alon x axis
-        rb = GetComponent<Rigidbody2D>();
         currentPosition = rb.position;
+        //vy = vy + Physics2D.gravity.y * Time.deltaTime;
+
 
         rb.MovePosition(
-            currentPosition + direction * vel * Time.deltaTime
+            currentPosition + (direction * vel * Time.deltaTime) //+ (Vector3.down * vy))
         );
 
         if (isMoving) {
@@ -59,6 +64,7 @@ public class PlayerController : MonoBehaviour
     void handleGravity() {
         if (Input.GetKeyDown(KeyCode.O)) {
             rb.gravityScale *= -1;
+            //Physics2D.gravity *= -1;
             changeStandingDirection();
         }
     }
@@ -102,6 +108,7 @@ public class PlayerController : MonoBehaviour
 
     void Update() {
         isGrounded = checkGrounded();
+        debugText.text = $"{rb.velocity.x} | {rb.velocity.y}";
 
         if (isGrounded) {
             handleGravity();

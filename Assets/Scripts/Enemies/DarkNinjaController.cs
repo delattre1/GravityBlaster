@@ -5,45 +5,84 @@ using UnityEngine;
 // REF https://www.youtube.com/watch?v=dHkbDn-KQ9E
 public class DarkNinjaController : MonoBehaviour
 {
-    Rigidbody2D rb2d;
-    [SerializeField] Transform castPos;
-    Vector3 baseScale;
-
-    string facingDirection;
-    [SerializeField] float baseCastDistance;
-    const string _L = "left";
-    const string _R = "right";
-    float vel = 5;
-
+    private Rigidbody2D rb2d;
+    private Animator anim;
+    private Vector3 baseScale;
+    [SerializeField] float vel = 5;
+    [SerializeField] LayerMask playerLayers;
+    [SerializeField] Transform attackPosition;
+    //private float xAxis;
+    private float last_vel;
+    private float attackRange = 0.5f;
 
     void Start()
     {
-        facingDirection = _R;
         baseScale = transform.localScale;
         rb2d = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
-    void FixedUpdate() {
+    // void Update()
+    // {
+    //     xAxis = Input.GetAxis("Horizontal");
+
+    //     // Cast a ray straight
+    //     Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
+    //     RaycastHit2D hitFront = Physics2D.Raycast(transform.position, forward);
+    //     Debug.DrawRay(transform.position, forward, Color.green);
+    // }
+
+    // Handles movement
+    void FixedUpdate() 
+    {
         rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
-
-        if (isHittingWall()) {print("HIT WALL!");}
     }
 
-    bool isHittingWall() {
-        bool  isHitting = false;
-        float castDist = baseCastDistance;
-
-        // Define if should cast the distance to LEFT or RIGHT
-        if (facingDirection == _L) {castDist = -baseCastDistance;}
+    // Patrols until wall
+    void OnTriggerEnter2D(Collider2D c)
+    {
         
-        // Determine target destination based on cast distance
-        Vector3 targetPos = castPos.position;
-        targetPos.x += castDist;
+        if (c.gameObject.tag == "Scenario"){
+            changeFacingDirection();
+        }
+    }
 
-        isHitting = Physics2D.Linecast(castPos.transform.position, 
-                                        targetPos, 
-                                        1 << LayerMask.NameToLayer("Ground"));
-        return isHitting;
+    // Flips enemy
+    public void changeFacingDirection() 
+    {
+        Vector3 newScale = transform.localScale;
+        if (newScale.x < 0) { newScale.x = baseScale.x;} else 
+        if (newScale.x > 0) { newScale.x =  -baseScale.x;}
+        transform.localScale = newScale;
+        vel *= -1;
+    }
+    
+    // Detects player
+    public void CollisionDetected(ChildScript childScript)
+    {
+        StartCoroutine(Attack());
+    } 
+
+    // Attacks
+    IEnumerator Attack()
+    {
+        // Stop for attack
+        last_vel = vel;
+        vel = 0;
+        anim.SetTrigger("attack");
+
+        // Attack check
+        yield return new WaitForSeconds(0.26f);
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, playerLayers);
+        foreach(Collider2D hit in hitPlayer){
+            Debug.Log("Levou");  // TIRAR VIDA AQUI <<<<<<--------------------------
+        }
+
+        // Cooldown
+        yield return new WaitForSeconds(1.5f);
+        anim.SetTrigger("run");
+        vel = last_vel;
+        changeFacingDirection();
     }
 
 }
