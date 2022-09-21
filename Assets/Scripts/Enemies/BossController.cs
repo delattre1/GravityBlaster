@@ -4,39 +4,72 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public Transform player;
-    public bool isFlipped = false;
+    // private Rigidbody2D rb2d;
+    // private Animator anim;
+    // private Vector3 baseScale;
+    // [SerializeField] float vel = 5;
+    // [SerializeField] LayerMask playerLayers;
+    // [SerializeField] Transform attackPosition;
+    // [SerializeField] Transform playerPosition;
+    // private float last_vel;
+    // private float attackRange = 0.5f;
 
-    public Vector3 attackOffset;
-    public float attackRange = 1f;
-    public LayerMask attackMask;
+    // void Start()
+    // {
+    //     baseScale = transform.localScale;
+    //     rb2d = GetComponent<Rigidbody2D>();
+    //     anim = GetComponent<Animator>();
+    // }
+    
+    // // Handles movement
+    // void FixedUpdate() 
+    // {
+    //     rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
+    // }
 
-    public void Attack() {
-        Vector3 pos = transform.position;
-        pos += transform.right * attackOffset.x;
-        pos += transform.up * attackOffset.y;
+    // // Handles movement
+    // void FixedUpdate() 
+    // {
+    //     rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
+    // }
+    
+    // // Ignores collision with other enemies
+    // void OnCollisionEnter2D(Collision2D col)
+    // {
+    //     if(col.gameObject.tag == "Enemy"){
+    //         Physics2D.IgnoreCollision(col.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+    //     }
+    // }
 
-        Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
-        if (colInfo != null) {
-            Debug.Log(colInfo);
-        }
-    }
+    // // Patrols until wall
+    // void OnTriggerEnter2D(Collider2D c)
+    // {
+        
+    //     if (c.gameObject.tag == "Scenario"){
+    //         changeFacingDirection();
+    //     }
+    // }
 
-    public void LookAtPlayer() {
-        Vector3 flipped = transform.localScale;
-        flipped.z *= -1f;
+    // // Flips enemy
+    // public void changeFacingDirection() 
+    // {
+    //     Vector3 newScale = transform.localScale;
+    //     if (newScale.x < 0) { newScale.x = baseScale.x;} else 
+    //     if (newScale.x > 0) { newScale.x =  -baseScale.x;}
+    //     transform.localScale = newScale;
+    //     vel *= -1;
+    // }
+    
+    // // Detects player
+    // public void CollisionDetected(ChildScript childScript)
+    // {
+    //     StartCoroutine(Attack());
+    // } 
 
-        if (transform.position.x > player.position.x && isFlipped) {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            isFlipped = false;
-        }
-        else if (transform.position.x < player.position.x && !isFlipped) {
-            transform.localScale = flipped;
-            transform.Rotate(0f, 180f, 0f);
-            isFlipped = true;
-        }
-    }
+    // // Attacks
+    // IEnumerator Attack()
+    // {
 
+    // }
 
 }
