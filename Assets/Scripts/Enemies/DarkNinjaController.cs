@@ -11,7 +11,6 @@ public class DarkNinjaController : MonoBehaviour
     [SerializeField] float vel = 5;
     [SerializeField] LayerMask playerLayers;
     [SerializeField] Transform attackPosition;
-    //private float xAxis;
     private float last_vel;
     private float attackRange = 0.5f;
 
@@ -22,20 +21,18 @@ public class DarkNinjaController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // void Update()
-    // {
-    //     xAxis = Input.GetAxis("Horizontal");
-
-    //     // Cast a ray straight
-    //     Vector3 forward = transform.TransformDirection(Vector3.forward) * 10;
-    //     RaycastHit2D hitFront = Physics2D.Raycast(transform.position, forward);
-    //     Debug.DrawRay(transform.position, forward, Color.green);
-    // }
-
     // Handles movement
     void FixedUpdate() 
     {
         rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
+    }
+    
+    // Ignores collision with other enemies
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Enemy"){
+            Physics2D.IgnoreCollision(col.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+        }
     }
 
     // Patrols until wall

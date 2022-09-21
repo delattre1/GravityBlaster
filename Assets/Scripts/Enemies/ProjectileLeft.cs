@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour
+public class ProjectileLeft : MonoBehaviour
 {
 
     private Rigidbody2D rb2d;
     private Animator anim;
-    [SerializeField] float vel = 7;
+    [SerializeField] float vel = -7;
     
     void Start()
     {

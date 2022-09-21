@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &991409204
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 991409205}
+  m_Layer: 0
+  m_Name: spawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &991409205
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991409204}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.322, y: 0.094, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6325909109558888908}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1638958936
 GameObject:
   m_ObjectHideFlags: 0
@@ -47,7 +78,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -49.113647, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -58,7 +89,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 119.85509, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &1638958938
 Rigidbody2D:
@@ -203,7 +234,7 @@ GameObject:
   - component: {fileID: 140463398}
   m_Layer: 0
   m_Name: FireWorm
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -222,6 +253,7 @@ Transform:
   m_Children:
   - {fileID: 1638958937}
   - {fileID: 1811135179}
+  - {fileID: 991409205}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -311,7 +343,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vel: 5
   attackPosition: {fileID: 1638958937}
-  firePrefab: {fileID: 5075718526328714897, guid: 46b05ebc01bfe70449be64aa967f8e28, type: 3}
+  spawnPosition: {fileID: 991409205}
+  fireRightPrefab: {fileID: 5075718526328714897, guid: 46b05ebc01bfe70449be64aa967f8e28, type: 3}
+  fireLeftPrefab: {fileID: 5075718526328714897, guid: afdc93d9ec4aaef429df868943b10da6, type: 3}
 --- !u!50 &140463396
 Rigidbody2D:
   serializedVersion: 4

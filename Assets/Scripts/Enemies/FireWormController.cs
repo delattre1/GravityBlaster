@@ -10,9 +10,12 @@ public class FireWormController : MonoBehaviour
     private Vector3 baseScale;
     [SerializeField] float vel = 5;
     [SerializeField] Transform attackPosition;
-    [SerializeField] GameObject firePrefab;
+    [SerializeField] Transform spawnPosition;
+    [SerializeField] GameObject fireRightPrefab;
+    [SerializeField] GameObject fireLeftPrefab; 
     private bool attack = false;
     private bool last_attack = false;
+    private bool right = false;
     private float last_vel;
 
     void Start()
@@ -27,7 +30,6 @@ public class FireWormController : MonoBehaviour
     {
         if(attack && !last_attack){
             last_vel = vel;
-            Debug.Log(vel);
             vel = 0;
             anim.SetBool("attack", true);
             last_attack = true;
@@ -44,10 +46,17 @@ public class FireWormController : MonoBehaviour
         rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
     }
 
+    // Ignores collision with other enemies
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Enemy"){
+            Physics2D.IgnoreCollision(col.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+        }
+    }
+
     // Patrols until wall
     void OnTriggerEnter2D(Collider2D c)
     {
-        
         if (c.gameObject.tag == "Scenario"){
             changeFacingDirection();
         }
@@ -61,6 +70,7 @@ public class FireWormController : MonoBehaviour
         if (newScale.x > 0) { newScale.x =  -baseScale.x;}
         transform.localScale = newScale;
         vel *= -1;
+        right = !right;
     }
 
     // Detects player
@@ -78,8 +88,10 @@ public class FireWormController : MonoBehaviour
     // Shoots Fireball
     public void Fire()
     {
-        Vector3 spawnPoint = new Vector3(transform.position.x + 0.269f, transform.position.y + 0.079f, 0f);
-        Instantiate(firePrefab, new Vector3(0.269f, 0.079f, 0f), Quaternion.identity);
+        if(!right){
+            Instantiate(fireRightPrefab, spawnPosition.position, Quaternion.identity);
+        }else{
+            Instantiate(fireLeftPrefab, spawnPosition.position, Quaternion.identity);
+        }
     }
-
 }

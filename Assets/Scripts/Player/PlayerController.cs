@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -10,8 +9,6 @@ public class PlayerController : MonoBehaviour
     Rigidbody2D rb;
     Vector3 direction, currentPosition, baseScale;
     CapsuleCollider2D capsColl; 
-
-    public Text debugText;
 
     float xAxis;
     bool isMoving;
@@ -108,7 +105,6 @@ public class PlayerController : MonoBehaviour
 
     void Update() {
         isGrounded = checkGrounded();
-        debugText.text = $"{rb.velocity.x} | {rb.velocity.y}";
 
         if (isGrounded) {
             handleGravity();
