@@ -25,15 +25,19 @@ AnimationClip:
       value: {fileID: 57566284, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
     - time: 0.18333334
       value: {fileID: 816927117, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
-    - time: 0.3
+    - time: 0.25
+      value: {fileID: 57566284, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
+    - time: 0.31666666
+      value: {fileID: 816927117, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
+    - time: 0.43333334
       value: {fileID: 1645021003, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
-    - time: 0.35
+    - time: 0.48333332
       value: {fileID: 87585349, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
-    - time: 0.41666666
+    - time: 0.55
       value: {fileID: 593732342, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
-    - time: 0.53333336
+    - time: 0.6666667
       value: {fileID: 725134228, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
-    - time: 0.5833333
+    - time: 0.71666664
       value: {fileID: 433127402, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
     attribute: m_Sprite
     path: 
@@ -57,6 +61,8 @@ AnimationClip:
     - {fileID: 1835659779, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
     - {fileID: 57566284, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
     - {fileID: 816927117, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
+    - {fileID: 57566284, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
+    - {fileID: 816927117, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
     - {fileID: 1645021003, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
     - {fileID: 87585349, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
     - {fileID: 593732342, guid: 7f771a74af8e99247ad830abb4bce3fb, type: 3}
@@ -67,7 +73,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.59999996
+    m_StopTime: 0.7333333
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -86,11 +92,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.31666666
-    functionName: Attack
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

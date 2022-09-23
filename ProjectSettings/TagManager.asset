@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Scenario
   - Enemy
+  - CameraChange
   layers:
   - Default
   - TransparentFX
