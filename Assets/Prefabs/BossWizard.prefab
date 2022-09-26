@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 6762905289211862516}
   - component: {fileID: 6762905289211862519}
   - component: {fileID: 6762905289211862518}
-  m_Layer: 0
+  - component: {fileID: 1502806518}
+  m_Layer: 8
   m_Name: BossWizard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -136,7 +137,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6762905289211862513}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d99e90472ae0d843b8d5cbe8bab95fe, type: 3}
   m_Name: 
@@ -147,6 +148,8 @@ MonoBehaviour:
   thuder: {fileID: 1141652963113856158, guid: f8d7b8862c5217f4ca06ceac2dad3d99, type: 3}
   hadouken_right: {fileID: 8172841683289996051, guid: eb91a928ec80e0c448326bdc1aa46527, type: 3}
   hadouken_left: {fileID: 6737254852870878366, guid: a2919ba665f53de48a9f17644056d6ca, type: 3}
+  right: {fileID: 0}
+  left: {fileID: 0}
 --- !u!70 &6762905289211862518
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -163,3 +166,19 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.155}
   m_Size: {x: 0.21, y: 0.52}
   m_Direction: 0
+--- !u!114 &1502806518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6762905289211862513}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03c5515d0f6ea524e995bc81e6fc7d16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Ninja: 0
+  Worm: 0
+  Boss: 1
+  health: 200

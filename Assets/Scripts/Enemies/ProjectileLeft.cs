@@ -27,6 +27,9 @@ public class ProjectileLeft : MonoBehaviour
         if (col.gameObject.tag == "Player" || col.gameObject.tag == "Scenario"){
             vel = 0;
             anim.SetTrigger("explode");
+            if(col.gameObject.tag == "Player"){
+                col.gameObject.GetComponent<PlayerController>().TakeDamage(10);
+            }
         }
     }
 

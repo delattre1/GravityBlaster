@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &359916181
+--- !u!1 &896077456
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,23 +8,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 359916182}
+  - component: {fileID: 896077457}
   m_Layer: 3
-  m_Name: ProjectilePlaceholder
+  m_Name: spawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &359916182
+--- !u!4 &896077457
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 359916181}
+  m_GameObject: {fileID: 896077456}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.865, y: 0.167, z: 0}
+  m_LocalPosition: {x: 0.521, y: 0.143, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -64,7 +64,7 @@ Transform:
   m_LocalScale: {x: 2.7457576, y: 2.7457576, z: 2.7457576}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 359916182}
+  - {fileID: 896077457}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -155,7 +155,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 30
+  m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -192,3 +192,10 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 128
+  slider: {fileID: 0}
+  fireRightPrefab: {fileID: 8071458755449155747, guid: 2a7ad0410d332f6458198bf98db3ad12, type: 3}
+  fireLeftPrefab: {fileID: 8725976897034019234, guid: c9616f7b7c6d3b1429774ef87a16de0b, type: 3}
+  spawnPosition: {fileID: 896077457}
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 256

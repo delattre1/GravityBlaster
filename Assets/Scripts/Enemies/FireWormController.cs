@@ -52,6 +52,10 @@ public class FireWormController : MonoBehaviour
         if(col.gameObject.tag == "Enemy"){
             Physics2D.IgnoreCollision(col.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
         }
+        
+        if (col.gameObject.tag == "Player"){
+            col.gameObject.GetComponent<PlayerController>().TakeDamage(10);
+        }
     }
 
     // Patrols until wall
@@ -93,5 +97,34 @@ public class FireWormController : MonoBehaviour
         }else{
             Instantiate(fireLeftPrefab, spawnPosition.position, Quaternion.identity);
         }
+    }
+
+    // Take damage
+    public void TakeDamage()
+    {
+        StartCoroutine(Damage());
+    }
+
+    // Kill
+    public void Murder()
+    {
+        vel = 0;
+        anim.SetTrigger("die");
+    }
+
+    // Dies
+    void Kill()
+    {
+        Destroy(gameObject);
+    }
+
+    // Damage Reaction
+    IEnumerator Damage()
+    {
+        anim.SetTrigger("hurt");
+        last_vel = vel;
+        vel = 0;
+        yield return new WaitForSeconds(0.28f);
+        vel = last_vel;
     }
 }

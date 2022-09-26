@@ -13,6 +13,8 @@ public class BossController : MonoBehaviour
     public GameObject thuder;
     public GameObject hadouken_right;
     public GameObject hadouken_left;
+    public GameObject right;
+    public GameObject left;
 
     void Start()
     {
@@ -33,6 +35,10 @@ public class BossController : MonoBehaviour
     {
         if(col.gameObject.tag == "Enemy"){
             Physics2D.IgnoreCollision(col.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
+        }
+        
+        if (col.gameObject.tag == "Player"){
+            col.gameObject.GetComponent<PlayerController>().TakeDamage(10);
         }
     }
 
@@ -110,7 +116,6 @@ public class BossController : MonoBehaviour
     void TriggerAttack()
     {
         int attack = Random.Range(0,4);
-        Debug.Log(attack);
         if(attack == 0){
             Dash();
         } else if (attack == 1){
@@ -128,5 +133,32 @@ public class BossController : MonoBehaviour
     {
         yield return new WaitForSeconds(Random.Range(2,4));
         TriggerAttack();
+    }
+
+    // Take damage
+    public void TakeDamage()
+    {
+        StartCoroutine(Damage());
+    }
+
+    // Kill
+    public void Murder()
+    {
+        anim.SetTrigger("die");
+    }
+
+    // Dies
+    void Kill()
+    {
+        left.GetComponent<PatrolPoint>().enabled = false;
+        right.GetComponent<PatrolPoint>().enabled = false;
+        Destroy(gameObject);
+    }
+
+    // Damage Reaction
+    IEnumerator Damage()
+    {
+        anim.SetTrigger("hurt");
+        yield return new WaitForSeconds(0.25f);
     }
 }

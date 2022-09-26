@@ -33,6 +33,10 @@ public class DarkNinjaController : MonoBehaviour
         if(col.gameObject.tag == "Enemy"){
             Physics2D.IgnoreCollision(col.gameObject.GetComponent<Collider2D>(), gameObject.GetComponent<Collider2D>());
         }
+        
+        if (col.gameObject.tag == "Player"){
+            col.gameObject.GetComponent<PlayerController>().TakeDamage(5);
+        }
     }
 
     // Patrols until wall
@@ -72,7 +76,7 @@ public class DarkNinjaController : MonoBehaviour
         yield return new WaitForSeconds(0.26f);
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, playerLayers);
         foreach(Collider2D hit in hitPlayer){
-            Debug.Log("Levou");  // TIRAR VIDA AQUI <<<<<<--------------------------
+            hit.gameObject.GetComponent<PlayerController>().TakeDamage(20);
         }
 
         // Cooldown
@@ -80,6 +84,35 @@ public class DarkNinjaController : MonoBehaviour
         anim.SetTrigger("run");
         vel = last_vel;
         changeFacingDirection();
+    }
+
+    // Take damage
+    public void TakeDamage()
+    {
+        StartCoroutine(Damage());
+    }
+
+    // Kill
+    public void Murder()
+    {
+        vel = 0;
+        anim.SetTrigger("die");
+    }
+
+    // Dies
+    void Kill()
+    {
+        Destroy(gameObject);
+    }
+
+    // Damage Reaction
+    IEnumerator Damage()
+    {
+        anim.SetTrigger("hurt");
+        last_vel = vel;
+        vel = 0;
+        yield return new WaitForSeconds(0.16f);
+        vel = last_vel;
     }
 
 }

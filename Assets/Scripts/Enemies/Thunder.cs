@@ -13,7 +13,7 @@ public class Thunder : MonoBehaviour
     {
         Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, playerLayers);
         foreach(Collider2D hit in hitPlayer){
-            Debug.Log("Levou");  // TIRAR VIDA AQUI <<<<<<--------------------------
+            hit.gameObject.GetComponent<PlayerController>().TakeDamage(10);
         }
         Kill();
     }
