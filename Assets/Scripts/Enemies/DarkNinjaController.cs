@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // REF https://www.youtube.com/watch?v=dHkbDn-KQ9E
+
 public class DarkNinjaController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private Animator anim;
     private Vector3 baseScale;
+    private CapsuleCollider2D collider;
     [SerializeField] float vel = 5;
     [SerializeField] LayerMask playerLayers;
     [SerializeField] Transform attackPosition;
-    private float last_vel;
+    private float max_vel;
     private float attackRange = 0.5f;
+    private bool cantAttack = false;
 
     void Start()
     {
         baseScale = transform.localScale;
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        collider = GetComponent<CapsuleCollider2D>();
+        max_vel = vel;
     }
 
     // Handles movement
@@ -56,46 +61,48 @@ public class DarkNinjaController : MonoBehaviour
         if (newScale.x > 0) { newScale.x =  -baseScale.x;}
         transform.localScale = newScale;
         vel *= -1;
+        max_vel *= -1;
     }
     
     // Detects player
     public void CollisionDetected(ChildScript childScript)
     {
-        StartCoroutine(Attack());
+        if(!cantAttack){
+            StartCoroutine(Attack());
+        }
     } 
 
     // Attacks
     IEnumerator Attack()
     {
         // Stop for attack
-        last_vel = vel;
         vel = 0;
         anim.SetTrigger("attack");
-
-        // Attack check
-        yield return new WaitForSeconds(0.26f);
-        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, playerLayers);
-        foreach(Collider2D hit in hitPlayer){
-            hit.gameObject.GetComponent<PlayerController>().TakeDamage(20);
-        }
 
         // Cooldown
         yield return new WaitForSeconds(1.5f);
         anim.SetTrigger("run");
-        vel = last_vel;
+        vel = max_vel;
         changeFacingDirection();
     }
 
-    // Take damage
-    public void TakeDamage()
+    // Attack check
+    void Hit()
     {
-        StartCoroutine(Damage());
+        Collider2D[] hitPlayer = Physics2D.OverlapCircleAll(attackPosition.position, attackRange, playerLayers);
+        foreach(Collider2D hit in hitPlayer){
+            hit.gameObject.GetComponent<PlayerController>().TakeDamage(20);
+        }
     }
 
     // Kill
     public void Murder()
     {
+        cantAttack = true;
         vel = 0;
+        rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
+        collider.enabled = false;
+        rb2d.gravityScale = 0;
         anim.SetTrigger("die");
     }
 
@@ -103,16 +110,6 @@ public class DarkNinjaController : MonoBehaviour
     void Kill()
     {
         Destroy(gameObject);
-    }
-
-    // Damage Reaction
-    IEnumerator Damage()
-    {
-        anim.SetTrigger("hurt");
-        last_vel = vel;
-        vel = 0;
-        yield return new WaitForSeconds(0.16f);
-        vel = last_vel;
     }
 
 }

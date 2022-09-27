@@ -8,6 +8,7 @@ public class FireWormController : MonoBehaviour
     private Rigidbody2D rb2d;
     private Animator anim;
     private Vector3 baseScale;
+    private CapsuleCollider2D collider;
     [SerializeField] float vel = 5;
     [SerializeField] Transform attackPosition;
     [SerializeField] Transform spawnPosition;
@@ -17,26 +18,30 @@ public class FireWormController : MonoBehaviour
     private bool last_attack = false;
     private bool right = false;
     private float last_vel;
+    private bool cantAttack = false;
 
     void Start()
     {
         baseScale = transform.localScale;
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        collider = GetComponent<CapsuleCollider2D>();
     }
 
     // Handles attack
     void Update()
-    {
-        if(attack && !last_attack){
-            last_vel = vel;
-            vel = 0;
-            anim.SetBool("attack", true);
-            last_attack = true;
-        } else if (!attack && last_attack){
-            vel = last_vel;
-            anim.SetBool("attack", false);
-            last_attack = false;
+    {               
+        if(!cantAttack){
+            if(attack && !last_attack){
+                last_vel = vel;
+                vel = 0;
+                anim.SetBool("attack", true);
+                last_attack = true;
+            } else if (!attack && last_attack){
+                vel = last_vel;
+                anim.SetBool("attack", false);
+                last_attack = false;
+            }
         }
     }
 
@@ -99,16 +104,15 @@ public class FireWormController : MonoBehaviour
         }
     }
 
-    // Take damage
-    public void TakeDamage()
-    {
-        StartCoroutine(Damage());
-    }
-
     // Kill
     public void Murder()
     {
+        cantAttack = true;
         vel = 0;
+        anim.SetBool("attack", false);
+        collider.enabled = false;
+        rb2d.gravityScale = 0;
+        rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
         anim.SetTrigger("die");
     }
 
@@ -116,15 +120,5 @@ public class FireWormController : MonoBehaviour
     void Kill()
     {
         Destroy(gameObject);
-    }
-
-    // Damage Reaction
-    IEnumerator Damage()
-    {
-        anim.SetTrigger("hurt");
-        last_vel = vel;
-        vel = 0;
-        yield return new WaitForSeconds(0.28f);
-        vel = last_vel;
     }
 }

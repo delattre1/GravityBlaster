@@ -37,7 +37,6 @@ public class Door : MonoBehaviour
     
     public void Close()
     {
-        Debug.Log("FoiParent");
         anim.SetTrigger("close");
         collider.enabled = true;
         isSealed = true;

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerController : MonoBehaviour
 {
     public LayerMask groundLayerMask;
+    public float attackRange = 1f;
     Animator controlAnimation;   
     Rigidbody2D rb;
     Vector3 direction, currentPosition, baseScale;
@@ -17,7 +18,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask enemyLayers;
 
     float xAxis;
-    float attackRange = 0.8f;
     bool isMoving;
     float vel = 0;
     bool isGrounded;
@@ -71,6 +71,12 @@ public class PlayerController : MonoBehaviour
                         );
 
         return rayCast.collider != null;
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(spawnPosition.position, attackRange);
     }
 
     void Update() {

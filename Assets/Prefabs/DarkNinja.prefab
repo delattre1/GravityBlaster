@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 852295195}
   - component: {fileID: 852295194}
   - component: {fileID: 852295193}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: turningPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 3517523511089788129}
   - component: {fileID: 134265130}
   - component: {fileID: 134265131}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: attackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,3 +394,5 @@ MonoBehaviour:
   Worm: 0
   Boss: 0
   health: 60
+  flashMaterial: {fileID: 2100000, guid: 9ee45d01f77d6b642a348a33af6abe84, type: 2}
+  duration: 0.125

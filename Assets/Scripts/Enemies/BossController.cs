@@ -1,15 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 public class BossController : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     private Animator anim;
     private Vector3 baseScale;
+    private CapsuleCollider2D collider;
     private float side = -1;
+    private bool cantAttack = false;
     [SerializeField] Transform playerPos;
     [SerializeField] float vel = 0;
     [SerializeField] float JumpForce = 5;
+    [SerializeField] Slider slider;
+    public Transform spawnPoint;
     public GameObject thuder;
     public GameObject hadouken_right;
     public GameObject hadouken_left;
@@ -21,7 +27,9 @@ public class BossController : MonoBehaviour
         baseScale = transform.localScale;
         rb2d = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        collider = GetComponent<CapsuleCollider2D>();
         StartCoroutine(Cooldown());
+        slider.value = 500;
     }
 
     // Handles movement
@@ -85,16 +93,15 @@ public class BossController : MonoBehaviour
     void SummonHadouken()
     {
         anim.SetTrigger("hadouken");
-        ThrowEnergyBall();
     }
     
     // Instantiates energy ball
     void ThrowEnergyBall()
     {
         if(side < 0){
-            Instantiate(hadouken_left, transform.position, Quaternion.identity);
+            Instantiate(hadouken_left, spawnPoint.position, Quaternion.identity);
         }else{
-            Instantiate(hadouken_right, transform.position, Quaternion.identity);
+            Instantiate(hadouken_right, spawnPoint.position, Quaternion.identity);
         }
         StartCoroutine(Cooldown());
     }
@@ -115,16 +122,18 @@ public class BossController : MonoBehaviour
     // Handles attack state machine
     void TriggerAttack()
     {
-        int attack = Random.Range(0,4);
-        if(attack == 0){
-            Dash();
-        } else if (attack == 1){
-            JumpDash();
-        } 
-        else if (attack == 2){
-            SummonHadouken();
-        } else {
-            SummonThunder();
+        if(!cantAttack){
+            int attack = Random.Range(0,4);
+            if(attack == 0){
+                Dash();
+            } else if (attack == 1){
+                JumpDash();
+            } 
+            else if (attack == 2){
+                SummonHadouken();
+            } else {
+                SummonThunder();
+            }
         }
     }
 
@@ -136,14 +145,22 @@ public class BossController : MonoBehaviour
     }
 
     // Take damage
-    public void TakeDamage()
+    public void TakeDamage(int damage)
     {
-        StartCoroutine(Damage());
+        slider.value -= damage;
     }
 
     // Kill
     public void Murder()
     {
+        cantAttack = true;
+        collider.enabled = false;
+        rb2d.gravityScale = 0;
+        anim.SetBool("run", false);
+        anim.SetBool("jump", false);
+        slider.value = 0;
+        vel = 0;
+        rb2d.velocity = new Vector2(vel, rb2d.velocity.y);
         anim.SetTrigger("die");
     }
 
@@ -153,12 +170,5 @@ public class BossController : MonoBehaviour
         left.GetComponent<PatrolPoint>().enabled = false;
         right.GetComponent<PatrolPoint>().enabled = false;
         Destroy(gameObject);
-    }
-
-    // Damage Reaction
-    IEnumerator Damage()
-    {
-        anim.SetTrigger("hurt");
-        yield return new WaitForSeconds(0.25f);
     }
 }

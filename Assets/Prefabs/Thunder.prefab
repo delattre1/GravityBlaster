@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1502072922}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: attackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 6681578863952753414}
   - component: {fileID: 3097449300784319012}
   - component: {fileID: 8702580105831998012}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Thunder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
