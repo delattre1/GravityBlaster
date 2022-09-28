@@ -51,9 +51,11 @@ public class PlayerController : MonoBehaviour
     }
 
     void handleGravity() {
-        if (Input.GetKeyDown(KeyCode.I) && !isAttacking) {
-            rb.gravityScale *= -1;
-            changeStandingDirection();
+        if (!MenuController.isPaused) {
+            if (Input.GetKeyDown(KeyCode.I) && !isAttacking) {
+                rb.gravityScale *= -1;
+                changeStandingDirection();
+            }
         }
     }
 
