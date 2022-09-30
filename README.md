@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 <!-- CREDITS -->
 # Credits:
 
@@ -12,3 +14,31 @@
 
 - Developed for the [Digital Games Insper Jam](https://itch.io/jam/insper222-projeto1/entries)
 - Play the game published at [itch.io](https://delattre.itch.io/inspergravityblaster)
+
+
+# Sample result
+
+- Player inital position
+![sh1-home]
+
+- Map Overview
+![sh2-map]
+
+- Boss
+![sh3-boss]
+
+- Boss Fight
+![sh4-boss_fight]
+
+- Victory Screen
+![sh5-victory]
+
+<!-- MARKDOWN LINKS & IMAGES -->
+
+[sh1-home]:               gameOverview/home.png
+[sh2-map]:                gameOverview/map.png
+[sh3-boss]:               gameOverview/boss.png
+[sh4-boss_fight]:         gameOverview/boss_fight.png
+[sh5-victory]:            gameOverview/victory.png
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
