@@ -18,7 +18,7 @@
 
 # Sample result
 
-- Player inital position
+- Game Home Screen
 ![sh1-home]
 
 - Map Overview
